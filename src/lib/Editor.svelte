@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
+  import { settings } from './stores/settings';
 
   export let content: string = '';
 
@@ -23,7 +24,7 @@
 <textarea
   use:autoResize
   class="w-full bg-white resize-none outline-none border-none text-gray-900 placeholder-gray-300 caret-gray-500"
-  style="font-family: 'Inconsolata Nerd Font', 'Inconsolata', 'Victor Mono', 'Menlo', monospace; font-size: 16px; line-height: 1.9; min-height: 80vh;"
+  style="font-family: '{$settings.font}', 'Inconsolata Nerd Font', monospace; font-size: {$settings.fontSize}px; line-height: 1.9; min-height: 80vh;"
   placeholder="Start writing..."
   value={content}
   on:input={handleInput}

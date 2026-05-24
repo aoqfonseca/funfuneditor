@@ -1,23 +1,24 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
-  import { openFileDialog, saveFileDialog } from './commands';
 
   export let open: boolean = false;
   export let previewMode: boolean = false;
 
   const dispatch = createEventDispatcher<{
     close: void;
-    openFile: string;
-    saveAs: string;
+    openFile: void;
+    saveAs: void;
     newFile: void;
     togglePreview: void;
+    openFontSettings: void;
   }>();
 
   $: commands = [
-    { id: 'open', label: 'Open file...' },
-    { id: 'save-as', label: 'Save as...' },
-    { id: 'new', label: 'New file' },
-    { id: 'toggle-preview', label: previewMode ? 'Hide preview' : 'Show preview  Ctrl+Shift+V' },
+    { id: 'open',           label: 'Open file...',    shortcut: 'Ctrl+O' },
+    { id: 'save-as',        label: 'Save as...',      shortcut: 'Ctrl+Shift+S' },
+    { id: 'new',            label: 'New file',        shortcut: 'Ctrl+N' },
+    { id: 'toggle-preview', label: previewMode ? 'Hide preview' : 'Show preview', shortcut: 'Ctrl+Shift+V' },
+    { id: 'font-settings',  label: 'Font & size…',                        shortcut: 'Ctrl+,' },
   ];
 
   let filter = '';
@@ -31,19 +32,19 @@
     setTimeout(() => inputEl?.focus(), 0);
   }
 
-  async function execute(id: string) {
+  function execute(id: string) {
     dispatch('close');
     filter = '';
     if (id === 'open') {
-      const path = await openFileDialog();
-      if (path) dispatch('openFile', path);
+      dispatch('openFile');
     } else if (id === 'save-as') {
-      const path = await saveFileDialog();
-      if (path) dispatch('saveAs', path);
+      dispatch('saveAs');
     } else if (id === 'new') {
       dispatch('newFile');
     } else if (id === 'toggle-preview') {
       dispatch('togglePreview');
+    } else if (id === 'font-settings') {
+      dispatch('openFontSettings');
     }
   }
 
@@ -76,11 +77,16 @@
         {#each filtered as cmd (cmd.id)}
           <li>
             <button
-              class="w-full text-left px-5 py-3 text-gray-700 hover:bg-gray-50 transition-colors"
+              class="w-full text-left px-5 py-3 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-between"
               style="font-family: -apple-system, sans-serif; font-size: 15px;"
               on:click={() => execute(cmd.id)}
             >
-              {cmd.label}
+              <span>{cmd.label}</span>
+              {#if cmd.shortcut}
+                <span style="font-size: 11px; color: #9ca3af; background: #f3f4f6; border-radius: 5px; padding: 2px 7px; letter-spacing: 0.03em; flex-shrink: 0;">
+                  {cmd.shortcut}
+                </span>
+              {/if}
             </button>
           </li>
         {/each}

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { marked } from 'marked';
+  import { settings } from './stores/settings';
 
   export let content: string = '';
 
@@ -12,7 +13,7 @@
 
 <div
   class="prose prose-gray max-w-none"
-  style="font-family: 'Inconsolata Nerd Font', 'Inconsolata', monospace; font-size: 16px; line-height: 1.9;"
+  style="font-family: '{$settings.font}', 'Inconsolata Nerd Font', monospace; font-size: {$settings.fontSize}px; line-height: 1.9;"
 >
   {@html html}
 </div>
