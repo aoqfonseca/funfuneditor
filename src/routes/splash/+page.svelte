@@ -37,8 +37,8 @@
   }
 
   .splash {
-    width: 300vw;
-    height: 300vh;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +48,7 @@
   }
 
   .logo {
-    width: 72%;
+    width: 100%;
     max-width: 980px;
     height: auto;
     object-fit: contain;
