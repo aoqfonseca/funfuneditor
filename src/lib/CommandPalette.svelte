@@ -3,18 +3,21 @@
   import { openFileDialog, saveFileDialog } from './commands';
 
   export let open: boolean = false;
+  export let previewMode: boolean = false;
 
   const dispatch = createEventDispatcher<{
     close: void;
     openFile: string;
     saveAs: string;
     newFile: void;
+    togglePreview: void;
   }>();
 
-  const commands = [
+  $: commands = [
     { id: 'open', label: 'Open file...' },
     { id: 'save-as', label: 'Save as...' },
     { id: 'new', label: 'New file' },
+    { id: 'toggle-preview', label: previewMode ? 'Hide preview' : 'Show preview  Ctrl+Shift+V' },
   ];
 
   let filter = '';
@@ -39,6 +42,8 @@
       if (path) dispatch('saveAs', path);
     } else if (id === 'new') {
       dispatch('newFile');
+    } else if (id === 'toggle-preview') {
+      dispatch('togglePreview');
     }
   }
 
