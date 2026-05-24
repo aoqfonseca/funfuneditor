@@ -5,7 +5,6 @@
   import CommandPalette from '$lib/CommandPalette.svelte';
   import FontSettings from '$lib/FontSettings.svelte';
   import FontLoader from '$lib/FontLoader.svelte';
-  import Splash from '$lib/Splash.svelte';
   import { loadFile, saveFile, openFileDialog, saveFileDialog } from '$lib/commands';
 
   let content = '';
@@ -105,7 +104,6 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <FontLoader />
-<Splash />
 
 <main class="min-h-screen bg-white" style="padding: 4rem 1.5rem;">
   {#if previewMode}
