@@ -19,7 +19,12 @@
     alt="FunfunZenWriter"
     class="logo"
   />
-  <p class="name">FunfunZenWriter</p>
+  <p class="name">
+    FunfunZenWriter
+    <span class="undername">
+      Markdown zen editor made by Andre Fonseca
+    </span>
+  </p>
 </div>
 
 <style>
@@ -32,8 +37,8 @@
   }
 
   .splash {
-    width: 100vw;
-    height: 100vh;
+    width: 300vw;
+    height: 300vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +49,7 @@
 
   .logo {
     width: 72%;
-    max-width: 580px;
+    max-width: 980px;
     height: auto;
     object-fit: contain;
     border-radius: 6px;
@@ -57,5 +62,10 @@
     letter-spacing: 0.18em;
     text-transform: uppercase;
     margin: 0;
+  }
+  .undername {
+    display: block;
+    font-size: 11px;
+    text-transform: none;
   }
 </style>

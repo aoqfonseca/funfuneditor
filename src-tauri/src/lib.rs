@@ -29,8 +29,8 @@ pub fn run() {
                 "splash",
                 tauri::WebviewUrl::App("splash".into()),
             )
-            .title("")
-            .inner_size(800.0, 480.0)
+            .title("FunfunZenEditor")
+            .inner_size(1024.0, 800.0)
             .decorations(false)
             .center()
             .resizable(false)
