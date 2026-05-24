@@ -8,9 +8,10 @@ A distraction-free Markdown editor for the desktop. Pure white canvas, no toolba
 
 - **Distraction-free** — full white canvas, 800px centered text, no toolbars
 - **Auto-save** — saves automatically 1 second after you stop typing
-- **Manual save** — `Ctrl+S`
-- **Command palette** — `Ctrl+Shift+P` to open/save files and create new documents
-- **Splash screen** — logo on startup, fades out gracefully
+- **Live preview** — split-pane Markdown preview, toggled with `Ctrl+Shift+V`
+- **Command palette** — `Ctrl+Shift+P` to access all commands with shortcut hints
+- **Font picker** — choose font family and size, persisted across sessions
+- **Splash window** — full-size branded splash on startup, dismisses automatically
 - **AI-ready** — stub backend command wired for future LLM integration
 - **Fast** — UTF-8 rope buffer ([ropey](https://crates.io/crates/ropey)) handles large files efficiently
 
@@ -96,8 +97,13 @@ Artifacts are written to `src-tauri/target/release/bundle/`.
 
 | Shortcut | Action |
 |----------|--------|
-| `Ctrl+S` | Save current file |
 | `Ctrl+Shift+P` | Open command palette |
+| `Ctrl+S` | Save current file |
+| `Ctrl+O` | Open file |
+| `Ctrl+Shift+S` | Save as… |
+| `Ctrl+N` | New file |
+| `Ctrl+Shift+V` | Toggle Markdown preview |
+| `Ctrl+,` | Font & size picker |
 
 ---
 
@@ -115,11 +121,14 @@ funfuneditor/
 │   └── tauri.conf.json
 ├── src/                # Svelte frontend
 │   ├── routes/
-│   │   └── +page.svelte    # Main editor page
+│   │   ├── +page.svelte        # Main editor page
+│   │   └── splash/+page.svelte # Splash screen (own Tauri window)
 │   └── lib/
 │       ├── Editor.svelte       # Textarea component
+│       ├── Preview.svelte      # Markdown preview (marked)
 │       ├── CommandPalette.svelte
-│       ├── Splash.svelte
+│       ├── FontSettings.svelte # Font/size picker panel
+│       ├── FontLoader.svelte   # Dynamic Google Font injection
 │       ├── commands.ts         # Typed Tauri invoke wrappers
 │       └── ai_service.ts       # AI integration stub
 └── .github/workflows/
